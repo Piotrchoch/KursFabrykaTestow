@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "38041b8b-15cc-49e3-a02a-8db56bdf51cf",
+		"name": "ZadanieDomoweMod7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostsTesting",
+			"item": [
+				{
+					"name": "GetAllPosts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"  pm.expect(jsonData[0]).to.be.a(\"object\");\r",
+									"  pm.expect(jsonData[0].userId).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData[0].id).to.be.an(\"number\");\r",
+									"  pm.expect(jsonData[0].title).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].body).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}",
+							"host": [
+								"{{PostsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllPosts_ForOneUser userId = UserId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 250ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"  pm.expect(jsonData[0]).to.be.a(\"object\");\r",
+									"  pm.expect(jsonData[0].userId).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData[0].id).to.be.an(\"number\");\r",
+									"  pm.expect(jsonData[0].title).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].body).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}?userId={{UserId}}",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{UserId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOnePost id = postID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  pm.expect(jsonData.userId).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData.id).to.be.an(\"number\");\r",
+									"  pm.expect(jsonData.title).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData.body).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewPost",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 543,\r\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\r\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\r\n}"
+						},
+						"url": {
+							"raw": "{{PostsUrl}}",
+							"host": [
+								"{{PostsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatingPost id = postID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 350ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 543,\r\n    \"title\": \"ea molestias quasi exercitationem repellat qui ipsa sit aut\",\r\n    \"body\": \"et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut\"\r\n}"
+						},
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletingPost id = postID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 350ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CommentsTesting",
+			"item": [
+				{
+					"name": "GetAllComments for post id = postID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"  pm.expect(jsonData[0]).to.be.a(\"object\");\r",
+									"  pm.expect(jsonData[0].postId).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData[0].id).to.be.an(\"number\");\r",
+									"  pm.expect(jsonData[0].name).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].email).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].body).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}/comments",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneComment for post id = postID and commend id = 14",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"  pm.expect(jsonData[0]).to.be.a(\"object\");\r",
+									"  pm.expect(jsonData[0].postId).to.be.a(\"number\");\r",
+									"  pm.expect(jsonData[0].id).to.be.an(\"number\");\r",
+									"  pm.expect(jsonData[0].name).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].email).to.be.a(\"string\");\r",
+									"  pm.expect(jsonData[0].body).to.be.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}/comments?id=14",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewComment for post id = postID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 350ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 3,\r\n    \"id\": 145,\r\n    \"name\": \"et officiis id praesentium hic aut ipsa dolorem repudiandae\",\r\n    \"email\": \"Nathan@solon.io\",\r\n    \"body\": \"vel quae voluptas qui exercitationem\\nvoluptatibus unde sed\\nminima et qui ipsam aspernatur\\nexpedita magnam laudantium et et quaerat ut qui dolorum\"\r\n}"
+						},
+						"url": {
+							"raw": "{{PostsUrl}}/{{postID}}/comments",
+							"host": [
+								"{{PostsUrl}}"
+							],
+							"path": [
+								"{{postID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatingComment id = 15",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 350ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"postId\": 3,\r\n        \"id\": 145,\r\n        \"name\": \"et officiis id praesentium hic aut ipsa dolorem repudiandae\",\r\n        \"email\": \"Nathan@solon.io\",\r\n        \"body\": \"vel quae voluptas qui exercitationem\\nvoluptatibus unde sed\\nminima et qui ipsam aspernatur\\nexpedita magnam laudantium et et quaerat ut qui dolorum\"\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "{{CommentsUrl}}/15",
+							"host": [
+								"{{CommentsUrl}}"
+							],
+							"path": [
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletingComment id = 10",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 350ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{CommentsUrl}}/10",
+							"host": [
+								"{{CommentsUrl}}"
+							],
+							"path": [
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
